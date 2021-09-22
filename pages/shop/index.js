@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid";
-
 import Card from "../../components/Card";
+import Head from "next/head";
 
 function List({ items }) {
   return (
@@ -12,6 +12,9 @@ function List({ items }) {
       columns={3}
       gap={3}
     >
+      <Head>
+        <title>getServerSideProps</title>
+      </Head>
       {items.slice(0, 10).map((data) => (
         <Grid key={data.id}>
           <Card
@@ -36,7 +39,7 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         destination: "/",
-        permanent: false
+        permanent: true
       }
     };
   }

@@ -4,12 +4,16 @@ import { useRecoilValue } from "recoil";
 import { filteredTodoListState } from "../Store";
 import Filter from "../components/Filter";
 import Status from "../components/Status";
+import Head from "next/head";
 
-function List() {
+function List({ env }) {
   const items = useRecoilValue(filteredTodoListState);
 
   return (
     <>
+      <Head>
+        <title>[{env}] todoList</title>
+      </Head>
       <ItemCreator />
       <Filter />
       {items.map((todoItem) => (
@@ -20,7 +24,10 @@ function List() {
   );
 }
 List.getInitialProps = () => {
-  const title = "fdf";
-  return { title };
+  const title = "home";
+  return {
+    title,
+    env: process.env.name
+  };
 };
 export default List;
